@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="event-creation-form.css">
+    <style>
+       
+    </style>
+        
+</head>
+<body style = "font-family: Poppins, sans-serif;">
+    <nav>
+        <h1 align="center">Create Event</h1>
+        <p id = "home-button"><a href="#">Home</a></p>
+    </nav>
+    
+    <form action="submit_event.php" method="POST" enctype="multipart/form-data">
+
+        <div id = "section">
+            <div id = "section-1">
+                <div class = "section-1-item">
+                    <label for="eventName">Please Enter Event Name:</label><br>
+                    <input type="text" id="eventName" name="eventName" required size="50" ><br>
+                </div>
+                
+                <div class = "section-1-item">
+                    <label for="eventArtist">Please Enter Event Artist or Organizer:</label><br>
+                    <input type="text" id="eventArtist" name="eventArtist" required><br>    
+                </div>
+               
+                <div class = "section-1-item">
+                    <label for="eventDate">Please Enter Date:</label><br>
+                    <input type="date" id="eventDate" name="eventDate" required><br>
+                </div>
+        
+                <div class = "section-1-item">
+                    <label for="eventTime">Please Enter Time:</label><br>
+                    <input type="time" id="eventTime" name="eventTime" required><br>
+                </div>
+                
+                <div id = "location" class = "section-1-item">
+                    <container class = "location-item">
+                        <label for="eventCity">Please Enter City:</label><br>
+                        <input type="text" id="eventCity" name="eventCity" required><br>
+                    </container>
+                    
+                    <div class = "location-item">
+                        <label for="eventState">Please Enter State:</label><br>
+                        <input type="text" id="eventState" name="eventState" required><br>
+                    </div>
+                </div>
+                
+        
+                <div class = "section-1-item" id = "ticketing">
+
+                    <div class = "ticketing-item" id = "ticketing-item-1">
+                        <label for="totalTickets">Please Enter Total Tickets Available:</label><br>
+                        <input type="number" id="totalTickets" name="totalTickets" required><br>
+                    </div>
+                       
+                    <div class = "ticketing-item">
+                        <label for="ticketPrice">Please Enter Price per Ticket:</label><br>
+                        <input type="number" id="ticketPrice" name="ticketPrice" required><br>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div id = "section-2">
+                <label for="eventDescription">Event Description:</label><br>
+                <textarea id="eventDescription" name="eventDescription" required></textarea><br>
+    
+                <label for="coverImage">Upload Cover Image for Event:</label><br>
+                <input type="file" id="coverImage" name="coverImage" accept="image/*" required><br><br>
+                    
+            </div>
+        </div>
+        
+        <div id="createButtonContainer">
+            <button type="submit" id = "create">Create</button>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("create").addEventListener("click", function(event) {
+            var eventName = document.getElementById("eventName").value;
+            var eventDate = document.getElementById("eventDate").value;
+            var eventTime = document.getElementById("eventTime").value;
+            var ticketPrice = document.getElementById("ticketPrice").value;
+            
+            if (eventName === "" || eventDate === "" || eventTime === "" || ticketPrice < 0) {
+                event.preventDefault(); // Prevent form submission
+                if (ticketPrice < 0) {
+                    alert("Price cannot be negative.");
+                } else {
+                    alert("Please fill in all required fields.");
+                }
+            }
+        });
+    });
+    </script>
+</body>
+</html>

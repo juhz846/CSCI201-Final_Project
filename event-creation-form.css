@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+nav {
+    display: flex;
+    justify-content: space-between; /* Align items to both ends of the container */
+    align-items: center; /* Vertically center items */
+    border-bottom: solid 1px #000000; 
+}
+
+
+h1 {
+    margin-top: 50px;
+    margin: 0;
+    color: #BB86FC;
+    padding-bottom: 20px;
+    /* border-bottom: solid 1px #000000; */
+    font-size: 40px;
+    /* padding-left: 50%; */
+    padding-left: 42%;
+}
+
+#home-button {
+    margin-right: 10%;
+    font-size: large;
+}
+
+nav a {
+    text-decoration: none;
+    color: #BB86FC;
+}
+
+#home-button:hover a {
+    color: #594077; /* Dark purple color */
+    text-decoration: underline;
+}
+
+#section {
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+    font-size: 15px;
+}
+
+
+input[type=text] {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: 2px solid #B8B9BB;
+}
+
+input[type=date] {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: 2px solid #B8B9BB;
+}
+
+#section-1 {
+    width: 40%;
+}
+
+#section-2 {
+    width: 40%;
+    margin-top: 20px;
+}
+
+
+#location {
+    display: flex;
+    flex-direction: row;
+}
+
+#ticketing {
+    display: flex;
+    flex-direction: row;
+}
+
+label {
+    color:darkgray;
+}
+
+input {
+    border-radius: 4px;
+    font-family: Poppins, sans-serif;
+}
+
+#eventDescription {
+    width: 500px;
+    height: 200px;
+    outline: none;
+    resize: none;
+    border: 2px solid #B8B9BB;
+    border-radius: 4px;
+    font-family: Poppins, sans-serif;
+    font-size: 18px;
+    color: rgb(101, 97, 97);
+}
+
+#createButtonContainer {
+    text-align: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+#create {
+    width: 15%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: 18px;
+    color: white;
+    background-color: #BB86FC;
+    border:#BB86FC;
+    border-radius: 5px;
+    font-weight: 40%;
+    font-family: Poppins, sans-serif;
+
+}
+
+#ticketPrice {
+    width: 60%; 
+    height: 40px;
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    border: 2px solid #B8B9BB;
+}
+
+#totalTickets {
+    width: 60%;
+    height: 40px;
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    border: 2px solid #B8B9BB;
+}
+
+#ticketing-item-1 {
+    padding-right: 30px;
+}
+
+.section-1-item {
+    margin-top: 20px;
+}
+
+#eventCity {
+    width: 80%;
+}
+
+#eventTime {
+    width: 20%;
+    height: 50px;
+    font-size: 18px;
+    border: 2px solid #B8B9BB;
+
+}
+
+input {
+    color: rgb(101, 97, 97);
+}
+
+
+
+
+  
+ 
