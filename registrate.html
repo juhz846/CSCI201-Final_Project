@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register Page</title>
+<link rel="stylesheet" href="registrate.css">
+</head>
+<body>
+
+	<div class="navbar">
+        <a id="home-button" href="#">Home</a>
+    </div>
+    
+	<div class="register-container">
+		<div class="left-panel">
+		</div>
+		<div class="right-panel">
+			<div class="register-form">
+				<h2>Create new Account</h2>
+				<p>
+					Already Registered? <a href="login_page.html"><b> Login</b></a>
+				</p>
+				<form action="submit-register-form" method="POST">
+					
+					<div class="input-group">
+						<label for="email">Email Address</label> 
+						<input type="email" id="email" name="email" required>
+					</div>
+					<div class="input-group password-group">
+						<label for="password">Password</label> 
+						<input type="password" id="password" name="password" required> 
+						<span class="toggle-password" onclick="togglePasswordVisibility()">SHOW</span>
+					</div>
+					<div class="input-group name-group">
+						<label for="username">Full Name</label> 
+						<input type="text" id="username" name="username" required>
+					</div>
+
+					<p>Select your role to SIGN UP:</p>
+					<div class="role-selection">
+						<button type="submit" class="role-button buyer">Buyer</button>
+						<button type="submit" class="role-button organizer">Organizer</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById('password');
+        var togglePassword = document.querySelector('.toggle-password');
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            togglePassword.textContent = "HIDE";
+        } else {
+            passwordInput.type = "password";
+            togglePassword.textContent = "SHOW";
+        }
+    }
+</script>
+
+</body>
+</html>

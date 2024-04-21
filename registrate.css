@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+body {
+    font-family: 'Arial', sans-serif;
+    padding-top: 30px;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    margin: 0;
+}
+
+.navbar {
+    width: 100%;
+    background-color: white;
+    color: white;
+    padding: 25px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+    font-family: 'Arial', sans-serif;
+}
+
+
+#home-button {
+    font-size: 20px;
+    color: #b288f5;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin-right: 7%;
+}
+
+#home-button:hover {
+    color: #594077;
+    text-decoration: underline;
+}
+
+.register-container {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 80%;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-panel {
+    width: 45%; /* Adjust */
+	background: url('bgphoto.png') no-repeat center center fixed;
+ 	background-size: contain; 
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.left-panel h1{
+	font-size: 3rem;
+	color: white;
+	font-family: 'Arial', sans-serif;
+	padding: 40px;
+	margin-top: -150px;
+}
+
+.left-panel p{
+	font-size: 1.3rem;
+	margin-top: -90px;
+    color: white;
+    padding: 40px; /* Adjust */
+    font-family: 'Trebuchet MS', 'Arial', sans-serif;
+}
+
+.right-panel {
+    width: 55%; /* Adjust */
+    background-color: #fff;
+    padding: 40px; /* Adjust */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form h2 {
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 2.1rem;
+    margin-top: 0;
+}
+
+.register-form p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.register-form a {
+    color: #b288f5;
+    text-decoration: none;
+}
+
+.register-form a:hover {
+    color: #b288f5;
+    text-decoration: underline;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3%;
+}
+
+.input-group label {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.password-group label {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.password-group {
+    position: relative;
+}
+
+.password-group input[type="password"] {
+    padding-right: 60px;
+}
+
+.name-group {
+	position: relative;
+}
+
+.toggle-password {
+    font-size: 0.9rem;
+    color: #b288f5;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: color 0.3s;
+    position: absolute;
+    right: 10px;
+    top: calc(67% - 0.5em);
+    background-color: transparent;
+    border: none;
+}
+
+.toggle-password:hover {
+    color: #594077;
+    text-decoration: underline;
+}
+
+.role-selection {
+	color: white;
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%; 
+}
+
+.role-button {
+    background-color: #b288f5;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 12px;
+    border: none;
+    transition: background-color 0.3s;
+    margin: auto;
+    width: 30%;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.role-button.organizer {
+    color: white;
+    font-size: 15px;
+}
+
+.role-button.buyer {
+    color: white;
+    font-size: 15px;
+}
+
+.role-button:hover {
+    background-color: #594077;
+}
