@@ -8,6 +8,7 @@
     <style>
        
     </style>
+    
         
 </head>
 <body style = "font-family: Poppins, sans-serif;">
@@ -16,7 +17,7 @@
         <p id = "home-button"><a href="#">Home</a></p>
     </nav>
     
-    <form action="submit_event.php" method="POST" enctype="multipart/form-data">
+    <form action="eventCreationServlet" method="POST" name="event-form" onsubmit="return submitForm()">
 
         <div id = "section">
             <div id = "section-1">
@@ -85,22 +86,66 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("create").addEventListener("click", function(event) {
-            var eventName = document.getElementById("eventName").value;
-            var eventDate = document.getElementById("eventDate").value;
-            var eventTime = document.getElementById("eventTime").value;
-            var ticketPrice = document.getElementById("ticketPrice").value;
+	        document.getElementById("create").addEventListener("click", function(event) {
+	            var eventName = document.getElementById("eventName").value;
+	            var eventDate = document.getElementById("eventDate").value;
+	            var eventTime = document.getElementById("eventTime").value;
+	            var ticketPrice = document.getElementById("ticketPrice").value;
+	            
+	            if (eventName === "" || eventDate === "" || eventTime === "" || ticketPrice < 0) {
+	                event.preventDefault(); // Prevent form submission
+	                if (ticketPrice < 0) {
+	                    alert("Price cannot be negative.");
+	                } else {
+	                    alert("Please fill in all required fields.");
+	                }
+	            }
+	        });
+    	});
+        
+    	function submitForm(){
+            var form = document.forms["event-form"];
+            var name = form["eventName"].value.trim();
+            var organizer_id = localStorage.getItem("organizer_id");
+            var artist = form["eventArtist"].value.trim();
+            var date = form["eventDate"].value.trim();
+            var time = form["eventTime"].value.trim();
+            var city = form["eventCity"].value.trim();
+            var state = form["eventState"].value.trim();
+            var totalAvail = form["totalTickets"].value.trim();
+            var price = form["ticketPrice"].value.trim();
+            var description = form["eventDescription"].value;
+            var imgFile = "img/brunomars.jpeg";
             
-            if (eventName === "" || eventDate === "" || eventTime === "" || ticketPrice < 0) {
-                event.preventDefault(); // Prevent form submission
-                if (ticketPrice < 0) {
-                    alert("Price cannot be negative.");
-                } else {
-                    alert("Please fill in all required fields.");
+            
+            // AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "eventCreationServlet");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    // Handle successful response
+                    var response = JSON.parse(xhr.responseText);
+                    // returns inserted eventID
+                    if (response) {
+                    	console.log(response);
+                    	// potentially to use in event details page to populate page dynamically
+                    	localStorage.setItem('event_id', response);
+                    	window.location.href = "events.html"; // CHANGE THIS TO EVENT DETAIL PAGE?
+                    }
+                }else if(xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200){
+                    var response = JSON.parse(xhr.responseText);
+                    if (response) {
+                        alert(response);
+                    }
                 }
-            }
-        });
-    });
+            };
+            
+            // send all data as json to add to SQL db
+            xhr.send(JSON.stringify({ name: name, organizer_id: organizer_id, date: date, time: time, city: city, state: state, totalAvail: totalAvail, price: price, description: description, imgFile: imgFile, artist: artist }));
+    		
+    		return false;
+    	}
     </script>
 </body>
 </html>
