@@ -1,8 +1,9 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-body {
-    font-family: 'Arial', sans-serif;
-    padding-top: 30px;
+#whole {
+    font-family: 'Poppins', sans-serif; 
+/*     padding-top: 30px; */
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -11,34 +12,70 @@ body {
     margin: 0;
 }
 
-.navbar {
-    width: 100%;
-    background-color: white;
-    color: white;
-    padding: 25px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.5);
-    font-family: 'Arial', sans-serif;
+body {
+	margin: 0;
 }
 
+nav {
+    color: #333;
+    margin: 0 30px;
+    border-radius: 0px 0px 10px 10px;
+    padding: 15px;
+    font-size: 12px;
+    font-weight: 400;
+
+    display: flex;
+    color: white;
+    
+    background-image: url('navbarimg.jpeg');
+    background-color: #f5cccc;
+    border: black;
+    border-width: 3px;
+    border-radius: 4px, 4px, 4px, 4px;
+    height: 60px; 
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+nav div a{
+    color: #fff;
+    text-decoration: none;
+}
+
+/* h1 {
+    margin-top: 50px;
+    margin: 0;
+    color: #BB86FC;
+    padding-bottom: 20px;
+    border-bottom: solid 1px #000000;
+    font-size: 40px;
+    padding-left: 50%;
+    padding-left: 42%;
+} */
 
 #home-button {
-    font-size: 20px;
-    color: #b288f5;
-    text-decoration: none;
-    padding: 5px 10px;
-    margin-right: 7%;
+    width: 80px;
+    height: 30px;
+    border: 0;
+    border-radius: 30px;
+    text-align: center;
+    background-color: rgb(37, 37, 145);
+    font-family: Poppins, sans serif;
+
 }
 
-#home-button:hover {
-    color: #594077;
-    text-decoration: underline;
+#profile-btn {
+    font-size: 18px;
+    color: white;
+    background-color: rgb(37, 37, 145);
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 }
 
 .login-container {
@@ -61,7 +98,7 @@ body {
 }
 
 
-.left-panel h1{
+.left-panel h3{
 	font-size: 3rem;
 	color: white;
 	font-family: 'Arial', sans-serif;
@@ -105,12 +142,12 @@ body {
 }
 
 .login-form a {
-    color: #b288f5;
+    color: #BB86FC;
     text-decoration: none;  
 }
 
 .login-form a:hover {
-	color: #b288f5;
+	color: #BB86FC;
 	text-decoration: underline;
 }
 
@@ -172,7 +209,7 @@ body {
 
 .toggle-password {
     font-size: 0.9rem;
-    color: #b288f5;
+    color: #BB86FC;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
@@ -190,7 +227,7 @@ body {
 }
 
 .login-button {
-    background-color: #b288f5;
+    background-color: #BB86FC;
     color: white;
     font-size: 15px;
     padding: 15px 30px;
