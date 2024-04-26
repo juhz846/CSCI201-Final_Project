@@ -27,10 +27,10 @@ public class eventCreationServlet extends HttpServlet {
 		int eventID = -1;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=allent2004");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=myminari1216");
 			
 			System.out.println("HERE!!!!");
-			ps = conn.prepareStatement("INSERT INTO events (name, organizer_id, event_date, event_time, city, state, total_available, price, description, img_file, artist) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+			ps = conn.prepareStatement("INSERT INTO events (name, organizer_id, event_date, event_time, city, state, total_available, price, description, img_file, artist) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, event.getName());
 			ps.setInt(2, event.getOrganizer());
 			ps.setString(3, event.getDate());
@@ -42,7 +42,7 @@ public class eventCreationServlet extends HttpServlet {
 			ps.setString(9, event.getDescription());
 			ps.setString(10, event.getImgFile());
 			ps.setString(11, event.getArtist());
-			ps.execute();
+			ps.executeUpdate();
 			
 			// get index of inserted event
 			rs = st.executeQuery("SELECT LAST_INSERT_ID()");
