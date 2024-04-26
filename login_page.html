@@ -12,7 +12,7 @@
 	<nav style="height: 30px;">
 	<h1>201 ticketing</h1>
 	<div>
-		<button id="home-button" style = " width: 80px; height: 30px;"> <a href="#">Home</a> </button>
+		<button id="home-button" style = " width: 80px; height: 30px;"> <a href="events.html">Home</a> </button>
 		<button id="profile-btn"><i class="fa fa-user"></i></button>
 		</div>
 	</nav>
@@ -32,7 +32,7 @@
 				<p>
 					Newcomer? <a href="registrate.html"><b> Sign up </b></a>
 				</p>
-				<form action="submit-login-form" method="POST">
+				<form action="LoginServlet" method="POST">
 					<div class="input-group">
 						<label for="username">Email Address</label> <input type="email"
 							id="username" name="username" required>
@@ -46,7 +46,7 @@
 						<input type="checkbox" id="remember-me" name="remember-me">
 						<label for="remember-me">Remember me</label>
 					</div>
-					<button type="submit" class="login-button">LOGIN</button>
+					<button type="submit" id ="log" class="login-button">LOGIN</button>
 				</form>
 			</div>
 		</div>
@@ -65,6 +65,48 @@
             togglePassword.textContent = "SHOW";
         }
     }
+    
+    
+
+	document.getElementById('log').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        var data = {
+            username: email,
+            password: password
+        };
+
+        fetch('LoginServlet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw response;
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data === -1) {
+            	alert('Invalid username or password. Please try again.');
+            } else {
+            	localStorage.setItem('userID', data);
+            	console.log(data);
+                window.location.href = 'events.html';
+            }
+        })
+        .catch(errorResponse => {
+            errorResponse.text().then(errorMessage => {
+                alert('Login failed: ' + errorMessage);
+            });
+        });
+    });
 </script>
 
 </body>
