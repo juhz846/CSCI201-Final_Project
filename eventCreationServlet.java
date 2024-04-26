@@ -11,6 +11,7 @@ import java.sql.*;
 
 @WebServlet("/eventCreationServlet")
 public class eventCreationServlet extends HttpServlet {
+	
 	protected static int registerEvent(Event event) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -26,8 +27,9 @@ public class eventCreationServlet extends HttpServlet {
 		int eventID = -1;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/ticketmaster?user=root&password=myminari1216");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=allent2004");
 			
+			System.out.println("HERE!!!!");
 			ps = conn.prepareStatement("INSERT INTO events (name, organizer_id, event_date, event_time, city, state, total_available, price, description, img_file, artist) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
 			ps.setString(1, event.getName());
 			ps.setInt(2, event.getOrganizer());
