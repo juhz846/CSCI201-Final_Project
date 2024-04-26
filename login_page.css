@@ -43,16 +43,7 @@ nav div a{
     text-decoration: none;
 }
 
-/* h1 {
-    margin-top: 50px;
-    margin: 0;
-    color: #BB86FC;
-    padding-bottom: 20px;
-    border-bottom: solid 1px #000000;
-    font-size: 40px;
-    padding-left: 50%;
-    padding-left: 42%;
-} */
+
 
 #home-button {
     width: 80px;
@@ -142,12 +133,12 @@ nav div a{
 }
 
 .login-form a {
-    color: #BB86FC;
+    color: #252591;
     text-decoration: none;  
 }
 
 .login-form a:hover {
-	color: #BB86FC;
+	color: #252591;
 	text-decoration: underline;
 }
 
@@ -209,7 +200,7 @@ nav div a{
 
 .toggle-password {
     font-size: 0.9rem;
-    color: #BB86FC;
+    color: #252591;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
@@ -227,7 +218,7 @@ nav div a{
 }
 
 .login-button {
-    background-color: #BB86FC;
+    background-color: #252591;
     color: white;
     font-size: 15px;
     padding: 15px 30px;
@@ -242,5 +233,5 @@ nav div a{
 }
 
 .login-button:hover {
-    background-color: #594077;
+    background-color: #131525;
 }
