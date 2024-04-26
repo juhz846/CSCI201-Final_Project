@@ -5,12 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register Page</title>
 <link rel="stylesheet" href="registrate.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body style = "font-family: Poppins, sans-serif;">
 
-	<div class="navbar">
-        <a id="home-button" href="#">Home</a>
-    </div>
+	<nav style="height: 30px;">
+	<h1>201 ticketing</h1>
+	<div>
+		<button id="home-button" style = " width: 80px; height: 30px;"> <a href="#">Home</a> </button>
+		<button id="profile-btn"><i class="fa fa-user"></i></button>
+		</div>
+	</nav>
+	<div id = "whole">
     
 	<div class="register-container">
 		<div class="left-panel">
@@ -21,7 +27,7 @@
 				<p>
 					Already Registered? <a href="login_page.html"><b> Login</b></a>
 				</p>
-				<form action="submit-register-form" method="POST">
+				<form action="RegisterServlet" method="POST">
 					
 					<div class="input-group">
 						<label for="email">Email Address</label> 
@@ -33,18 +39,19 @@
 						<span class="toggle-password" onclick="togglePasswordVisibility()">SHOW</span>
 					</div>
 					<div class="input-group name-group">
-						<label for="username">Full Name</label> 
+						<label for="username">Username</label> 
 						<input type="text" id="username" name="username" required>
 					</div>
 
 					<p>Select your role to SIGN UP:</p>
 					<div class="role-selection">
-						<button type="submit" class="role-button buyer">Buyer</button>
+						<button type="submit" id = "signup" class="role-button buyer">Buyer</button>
 						<button type="submit" class="role-button organizer">Organizer</button>
 					</div>
 				</form>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<script>
@@ -59,6 +66,53 @@
             togglePassword.textContent = "SHOW";
         }
     }
+    
+	document.getElementById('signup').addEventListener('click', function (event) {
+	    event.preventDefault(); // Prevent the form from submitting until we do our check
+
+	    const password = document.getElementById('password').value;
+	    const email = document.getElementById('email').value;
+	    const username = document.getElementById('username').value;
+
+
+		    var data = {
+		        email: email,
+		        username: username,
+		        password: password
+		    };
+	
+		    // Use fetch to send the POST request
+		    fetch('RegisterServlet', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+		        },
+		        body: JSON.stringify(data)
+		    })
+		    .then(response => {
+		        if (!response.ok) {
+		            throw response;
+		        }
+		        return response.json();
+		    })
+		    .then((data) => {
+		        localStorage.setItem('userID', JSON.stringify(data));
+		        console.log(JSON.parse(localStorage.getItem("userID")));
+
+		        if (data === -1) {
+		            alert('Username is taken. Please try a different one.');
+		        } else if (data === -2) {
+		            alert('Email is already registered. Please use a different email.');
+		        } else {
+		            window.location.href = 'events.html';
+		        }
+		    })
+		    .catch(errorResponse => {
+		        errorResponse.text().then( errorMessage => {
+		            alert(JSON.parse(errorMessage));
+		        });
+		    });
+	});
 </script>
 
 </body>
