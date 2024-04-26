@@ -1,6 +1,8 @@
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import java.nio.file.Files;
 
 import com.google.gson.Gson;
 
@@ -8,8 +10,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.io.*;
+
 
 @WebServlet("/eventCreationServlet")
+@MultipartConfig
 public class eventCreationServlet extends HttpServlet {
 	
 	protected static int registerEvent(Event event) {
@@ -27,9 +32,15 @@ public class eventCreationServlet extends HttpServlet {
 		int eventID = -1;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=myminari1216");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=allent2004");
 			
-			System.out.println("HERE!!!!");
+
+			
+			
+			
+			
+			// INSERT EVENT
+			
 			ps = conn.prepareStatement("INSERT INTO events (name, organizer_id, event_date, event_time, city, state, total_available, price, description, img_file, artist) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, event.getName());
 			ps.setInt(2, event.getOrganizer());
@@ -45,12 +56,13 @@ public class eventCreationServlet extends HttpServlet {
 			ps.executeUpdate();
 			
 			// get index of inserted event
+			st = conn.createStatement();
 			rs = st.executeQuery("SELECT LAST_INSERT_ID()");
 			rs.next();
 			eventID = rs.getInt(1);
 			
 		}catch(SQLException sqle) {
-			System.out.println("SQLException in registerUser. ");
+			System.out.println("SQLException in registerEvent. ");
 			sqle.printStackTrace();
 		}finally {
 			try {
@@ -74,22 +86,54 @@ public class eventCreationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 		response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
+        response.setContentType("multipart/form-data");
         
-        // Read the JSON data from the request body
-	    BufferedReader reader = request.getReader();
-	    StringBuilder sb = new StringBuilder();
-	    String line;
-	    while ((line = reader.readLine()) != null) {
-	        sb.append(line);
-	    }
-	    String jsonString = sb.toString();
+
+        
+		//UPLOAD IMAGE TO SERVER
+		
+		Part filePart = request.getPart("file");
+		String fileName = filePart.getSubmittedFileName();
+		String uploadPath = getServletContext().getRealPath("/") + "img/" + fileName;
+		System.out.println(uploadPath);
+
+
+		File uploadDir = new File(getServletContext().getRealPath("/") + "img/");
+		if (!uploadDir.exists()) {
+		    uploadDir.mkdirs();
+		}
+
+		File uploadedFile = new File(uploadPath);
+		try (InputStream input = filePart.getInputStream()) {
+		    Files.copy(input, uploadedFile.toPath());
+		} catch (IOException e) {
+		    // Handle the exception appropriately
+		    e.printStackTrace();
+		}
+		
+		FileOutputStream fo = new FileOutputStream(uploadPath);
+		InputStream is = filePart.getInputStream();
+		byte[] data = new byte[is.available()];
+		is.read(data);
+		fo.write(data);
+		fo.close();
+		
+		
+		String eventName = request.getParameter("eventName");
+        String eventArtist = request.getParameter("eventArtist");
+        String eventDate = request.getParameter("eventDate");
+        String eventTime = request.getParameter("eventTime");
+        String eventCity = request.getParameter("eventCity");
+        String eventState = request.getParameter("eventState");
+        String totalTickets = request.getParameter("totalTickets");
+        String ticketPrice = request.getParameter("ticketPrice");
+        String eventDescription = request.getParameter("eventDescription");
 	    
-	    // Print the JSON data received from the client
-	    System.out.println("Received JSON: " + jsonString);
-	    
-	    Event event = new Gson().fromJson(jsonString, Event.class);
-	    
+
+        Event event = new Event(eventName, 1, eventDate, eventTime, eventCity, eventState, Integer.parseInt(totalTickets), Double.parseDouble(ticketPrice), eventDescription, fileName, eventArtist);
+        
+        
+        
 	    int eventID = registerEvent(event);
 	    
 	    Gson gson = new Gson();
@@ -123,6 +167,7 @@ class Event {
 	public Event(String name, int organizer_id, String date, String time, String city, String state, int totalAvail, double price, String description, String imgFile, String artist) {
 		this.name = name;
 		this.organizer_id = organizer_id;
+		this.date = date;
 		this.time = time;
 		this.city = city;
 		this.state = state;
@@ -175,6 +220,10 @@ class Event {
 
 	public String getImgFile() {
 		return imgFile;
+	}
+	
+	public void setImgFile(String imgFile) {
+		this.imgFile = imgFile;
 	}
 
 	public String getArtist() {
