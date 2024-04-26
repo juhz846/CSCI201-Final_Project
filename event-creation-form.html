@@ -17,7 +17,7 @@
         <p id = "home-button"><a href="#">Home</a></p>
     </nav>
     
-    <form action="eventCreationServlet" method="POST" name="event-form" onsubmit="return submitForm()">
+    <form action="eventCreationServlet" method="POST" name="event-form" onsubmit="return submitForm()" enctype="multipart/form-data">
 
         <div id = "section">
             <div id = "section-1">
@@ -74,7 +74,7 @@
                 <textarea id="eventDescription" name="eventDescription" required></textarea><br>
     
                 <label for="coverImage">Upload Cover Image for Event:</label><br>
-                <input type="file" id="coverImage" name="coverImage" accept="image/*" required><br><br>
+                <input type="file" id="file" name="file" accept="image/*" required><br><br>
                     
             </div>
         </div>
@@ -105,8 +105,13 @@
         
     	function submitForm(){
             var form = document.forms["event-form"];
-            var name = form["eventName"].value.trim();
-            var organizer_id = localStorage.getItem("organizer_id");
+            var formData = new FormData(form);
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ', ' + pair[1]);
+            }
+/*             var name = form["eventName"].value.trim();
+            var organizer_id = 1
+            	//localStorage.getItem("organizer_id");
             var artist = form["eventArtist"].value.trim();
             var date = form["eventDate"].value.trim();
             var time = form["eventTime"].value.trim();
@@ -114,15 +119,14 @@
             var state = form["eventState"].value.trim();
             var totalAvail = form["totalTickets"].value.trim();
             var price = form["ticketPrice"].value.trim();
-            var description = form["eventDescription"].value;
-            var imgFile = "img/brunomars.jpeg";
+            var description = form["eventDescription"].value; */
             
             
             // AJAX request
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "eventCreationServlet");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function () {
+/*             xhr.setRequestHeader("Content-Type", "multipart/form-data");
+ */            xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     // Handle successful response
                     var response = JSON.parse(xhr.responseText);
@@ -142,7 +146,7 @@
             };
             
             // send all data as json to add to SQL db
-            xhr.send(JSON.stringify({ name: name, organizer_id: organizer_id, date: date, time: time, city: city, state: state, totalAvail: totalAvail, price: price, description: description, imgFile: imgFile, artist: artist }));
+            xhr.send(formData);
     		
     		return false;
     	}
