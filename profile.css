@@ -1,0 +1,88 @@
+#profile-btn {
+    width: 80px;
+    height: 30px;
+    border: 0;
+    border-radius: 30px;
+    text-align: center;
+    background-color: rgb(37, 37, 145);
+    font-family: Poppins, sans serif;
+}
+
+#profile-header {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.event-grid {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+}
+
+.row {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+.event-card {
+    padding: 10px;
+    text-align: center;
+}
+
+.event-card eventImg {
+    border: 5px solid #f5cccc;
+}
+
+img
+{
+    border: 1.5px solid #333;
+    border-radius: 20px;
+    height: 40%;
+    width: 100%;
+    object-fit: cover;
+}
+
+#eventCreationButtonContainer {
+    text-align: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+#event-creation-button {
+    width: 15%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: 18px;
+    color: white;
+    background-color: rgb(37, 37, 145);
+    border: rgb(37, 37, 145);
+    border-radius: 5px;
+    font-weight: 40%;
+    font-family: Poppins, sans-serif;
+}
+
+#event-creation-link {
+    text-decoration: none;
+    color: white;
+}
+
+#description {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#left {
+    text-align: left;
+}
+
+#right {
+    text-align: right;
+}
+
+main {
+    padding: 20px;
+}

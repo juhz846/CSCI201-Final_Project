@@ -9,15 +9,17 @@ nav {
 }
 
 
-h1 {
+/* h1 {
     margin-top: 50px;
     margin: 0;
-    color: #BB86FC;
     padding-bottom: 20px;
-    /* border-bottom: solid 1px #000000; */
     font-size: 40px;
-    /* padding-left: 50%; */
     padding-left: 42%;
+} */
+
+h2 {
+    padding-top: 40px;
+    color: rgb(37, 37, 145);
 }
 
 #home-button {
@@ -33,6 +35,19 @@ nav a {
 #home-button:hover a {
     color: #594077; /* Dark purple color */
     text-decoration: underline;
+}
+
+#profile-btn {
+    font-size: 18px;
+    color: white;
+    background-color: rgb(37, 37, 145);
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 }
 
 #section {
@@ -113,8 +128,8 @@ input {
     margin: 8px 0;
     font-size: 18px;
     color: white;
-    background-color: #BB86FC;
-    border:#BB86FC;
+    background-color: rgb(37, 37, 145);
+    border: rgb(37, 37, 145);
     border-radius: 5px;
     font-weight: 40%;
     font-family: Poppins, sans-serif;
