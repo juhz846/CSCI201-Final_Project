@@ -137,4 +137,69 @@ public class JDBC {
 		}
 		return -3;
 	}
+	public static String searchEvents(String input) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+		}
+		
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		
+		String json = "";
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/final?user=root&password=root");
+			st = conn.createStatement();
+			rs = st.executeQuery("SELECT * FROM event WHERE name LIKE '%"+input+"%';");
+			while (rs.next()) {
+				String name = rs.getString("name");
+				int organizer_id = rs.getInt("organizer_id");
+				Date event_date = rs.getDate("event_date");
+				Time event_time = rs.getTime("event_time");
+				String city = rs.getString("city");
+				String state = rs.getString("state");
+				int total_availability = rs.getInt("total_available");
+				int availability = rs.getInt("availability");
+				int price = rs.getInt("price");
+				String description = rs.getString("description");
+				String img_file = rs.getString("img_file");
+
+				json += "{\"name\"" + ": \"" + name + "\"," + 
+						"\"organizer_id\"" + ": \"" + organizer_id + "\"," + 
+						"\"event_date\"" + ": \"" + event_date + "\"," +
+						"\"event_time\"" + ": \"" + event_time + "\"," +
+						"\"city\"" + ": \"" + city + "\"," +
+						"\"state\"" + ": \"" + state + "\"," +
+						"\"total_availability\"" + ": \"" + total_availability + "\"," +
+						"\"availability\"" + ": \"" + availability + "\"," +
+						"\"price\"" + ": \"" + price + "\"," +
+						"\"description\"" + ": \"" + description + "\"," +
+						"\"img_file\"" + ": \"" + img_file + "\"}*";
+			}
+		} catch(SQLException sqle) {
+			sqle.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.out.println("sqle: " + sqle.getMessage());
+			}
+		}
+		if (json.length() > 1) {
+			return json.substring(0, json.length()-1);
+		} else {
+			return "";
+		}
+	}
 }
