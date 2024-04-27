@@ -161,7 +161,7 @@ public class JDBC {
 				Time event_time = rs.getTime("event_time");
 				String city = rs.getString("city");
 				String state = rs.getString("state");
-				int total_availability = rs.getInt("total_available");
+				int total_availability = rs.getInt("total_availability");
 				int availability = rs.getInt("availability");
 				int price = rs.getInt("price");
 				String description = rs.getString("description");
