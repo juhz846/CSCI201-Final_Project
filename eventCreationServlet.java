@@ -15,9 +15,9 @@ import java.io.*;
 
 @WebServlet("/eventCreationServlet")
 @MultipartConfig
-public class EventCreationServlet extends HttpServlet {
+public class eventCreationServlet extends HttpServlet {
 	
-	protected static int registerEvent(Event event) {
+	protected static int registerEvent(Event event, byte[] fileData) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		}catch(ClassNotFoundException e) {
@@ -34,9 +34,6 @@ public class EventCreationServlet extends HttpServlet {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=allent2004");
 			
-
-			
-			
 			
 			
 			// INSERT EVENT
@@ -51,7 +48,7 @@ public class EventCreationServlet extends HttpServlet {
 			ps.setInt(7, event.getTotalAvail());
 			ps.setDouble(8, event.getPrice());
 			ps.setString(9, event.getDescription());
-			ps.setString(10, event.getImgFile());
+			ps.setBytes(10, fileData);
 			ps.setString(11, event.getArtist());
 			ps.executeUpdate();
 			
@@ -88,37 +85,22 @@ public class EventCreationServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
         response.setContentType("multipart/form-data");
         
-
         
-		//UPLOAD IMAGE TO SERVER
-		
-		Part filePart = request.getPart("file");
-		String fileName = filePart.getSubmittedFileName();
-		String uploadPath = getServletContext().getRealPath("/") + "img/" + fileName;
-		System.out.println(uploadPath);
+        // reading in image file
+        Part filePart = request.getPart("file");
+        // Get the filename from the Part
+        String fileName = filePart.getSubmittedFileName();
 
+        // Get the InputStream of the file data
+        InputStream fileContent = filePart.getInputStream();
 
-		File uploadDir = new File(getServletContext().getRealPath("/") + "img/");
-		if (!uploadDir.exists()) {
-		    uploadDir.mkdirs();
-		}
+        // Read the file content into a byte array
+        byte[] fileData = new byte[(int) filePart.getSize()];
+        fileContent.read(fileData);
+        fileContent.close();
 
-		File uploadedFile = new File(uploadPath);
-		try (InputStream input = filePart.getInputStream()) {
-		    Files.copy(input, uploadedFile.toPath());
-		} catch (IOException e) {
-		    // Handle the exception appropriately
-		    e.printStackTrace();
-		}
 		
-		FileOutputStream fo = new FileOutputStream(uploadPath);
-		InputStream is = filePart.getInputStream();
-		byte[] data = new byte[is.available()];
-		is.read(data);
-		fo.write(data);
-		fo.close();
-		
-		
+		// getting the other info
 		String eventName = request.getParameter("eventName");
         String eventArtist = request.getParameter("eventArtist");
         String eventDate = request.getParameter("eventDate");
@@ -134,7 +116,7 @@ public class EventCreationServlet extends HttpServlet {
         
         
         
-	    int eventID = registerEvent(event);
+	    int eventID = registerEvent(event, fileData);
 	    
 	    Gson gson = new Gson();
 	    
