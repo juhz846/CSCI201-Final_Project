@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+}
+
+nav div a{
+    color: #fff;
+    text-decoration: none;
+}
+
+
+#signin-btn {
+    width: 80px;
+    height: 30px;
+    border: 0;
+    border-radius: 30px;
+    text-align: center;
+    background-color: rgb(37, 37, 145);
+    font-family: Poppins, sans serif;
+
+}
+
+#profile-btn {
+    font-size: 18px;
+    color: white;
+    background-color: rgb(37, 37, 145);
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.top-bar {
+  font-size: medium;
+  background-color: rgb(126, 130, 245);
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.buy-container {
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;  
+    background-color: rgb(228,228,228);
+}
+
+.float-container {
+	width: 50%;
+	display: flex;
+}
+
+.flex-left{
+	flex: 0 0 50%;
+	text-align: left;
+	margin-left: 100px;
+}
+
+.flex-right{
+	flex: 0 0 auto;
+	margin-left: 50px;
+}
+
+
+.green {
+	color: rgb(0, 153, 77)
+	}
+
+.red {
+	color: rgb(180, 0, 0)
+	}
+
+.flex-lr{
+	flex: 0 0 auto;
+}
+
+.flex-rl{
+	flex: 0 0 auto;
+	margin-left: 50px;
+}
+
+.big-text {
+	font-size: large;
+}
+
+.medium-text {
+	font-size: medium;
+}
+
+.small-text {
+	font-size: small;
+	background-color: rgb(228, 228, 228);
+}
+
+.narrow{
+	width: 25px;
+}
+
+
+.xxl-text {
+	font-size: xx-large;
+}
+.xl-text {
+	font-size: x-large;
+}
+
+.white-text {
+      color: white;
+      text-decoration: none;
+      font-style: normal;
+      font-weight: normal;
+}
+
+.buy-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-left: 50%;
+}
+
+
+.event-info {
+  flex: 1;
+}
+
+.event-image {
+  margin-left: 20px;
+}
+
+nav {
+    color: #333;
+    margin: 0 30px;
+    border-radius: 0px 0px 10px 10px;
+    padding: 15px;
+    font-size: 12px;
+    font-weight: 400;
+
+    display: flex;
+    color: white;
+    
+    background-image: url(img/navbarimg.jpeg);
+    background-color: #f5cccc;
+    border: black;
+    border-width: 3px;
+    border-radius: 4px, 4px, 4px, 4px;
+    height: 60px; 
+    justify-content: space-between;
+    align-items: center;
+
+}

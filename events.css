@@ -123,13 +123,13 @@ main {
 .row {
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
 }
 
 .event-card {
     padding: 10px;
     text-align: center;
+    margin: 0 auto;
 }
 
 .event-card eventImg {

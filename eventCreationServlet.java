@@ -15,7 +15,7 @@ import java.io.*;
 
 @WebServlet("/eventCreationServlet")
 @MultipartConfig
-public class eventCreationServlet extends HttpServlet {
+public class EventCreationServlet extends HttpServlet {
 	
 	protected static int registerEvent(Event event) {
 		try {

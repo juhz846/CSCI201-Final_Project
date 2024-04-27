@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <link rel="stylesheet" href="event.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="event.js"></script>
+</head>
+<body onload="generateContent(getQueryParam('eventName'));">
+	<nav>
+        <h1>201 ticketing</h1>
+        <div>
+            <button id="signin-btn"><a href="login_page.html">Logout</a></button>
+            <button id="profile-btn"><i class="fa fa-user"></i></button>
+        </div>
+    </nav>
+  	<div class="container">
+  	    <div class="event-info">
+		    <h1 id="name"></h1>
+		    <p id="location"></p>
+		    <p id="date"></p>
+		    <p id="description"></p>
+		    <p id="price"></p>
+		    <button class="buy-button" onclick="buyTicket()">Buy Tickets</button>
+	    </div>
+	    <div class="event-image">
+	    	<img src="event_image.jpg" alt="Event Image">
+	    </div>
+	    
+  	</div>
+
+</body>
+</html>
