@@ -103,6 +103,7 @@ public class eventCreationServlet extends HttpServlet {
 		// getting the other info
 		String eventName = request.getParameter("eventName");
         String eventArtist = request.getParameter("eventArtist");
+        String eventOrganizer = request.getParameter("organizerID");
         String eventDate = request.getParameter("eventDate");
         String eventTime = request.getParameter("eventTime");
         String eventCity = request.getParameter("eventCity");
@@ -112,7 +113,7 @@ public class eventCreationServlet extends HttpServlet {
         String eventDescription = request.getParameter("eventDescription");
 	    
 
-        Event event = new Event(eventName, 1, eventDate, eventTime, eventCity, eventState, Integer.parseInt(totalTickets), Double.parseDouble(ticketPrice), eventDescription, fileName, eventArtist);
+        Event event = new Event(eventName, Integer.parseInt(eventOrganizer), eventDate, eventTime, eventCity, eventState, Integer.parseInt(totalTickets), Double.parseDouble(ticketPrice), eventDescription, fileName, eventArtist);
         
         
         
