@@ -34,7 +34,7 @@
 				</p>
 				<form action="LoginServlet" method="POST">
 					<div class="input-group">
-						<label for="username">Email Address</label> <input type="email"
+						<label for="username">Username</label> <input type="email"
 							id="username" name="username" required>
 					</div>
 					<div class="input-group password-group">
@@ -46,7 +46,11 @@
 						<input type="checkbox" id="remember-me" name="remember-me">
 						<label for="remember-me">Remember me</label>
 					</div>
-					<button type="submit" id ="log" class="login-button">LOGIN</button>
+					
+					<div class="role-selection">
+						<button type="submit" id = "userlog" class="login-button ">User Login</button>
+						<button type="submit" id = "organizerlog" class="login-button">Organizer Login</button>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -68,18 +72,18 @@
     
     
 
-	document.getElementById('log').addEventListener('click', function(event) {
+	document.getElementById('userlog').addEventListener('click', function(event) {
         event.preventDefault();
 
-        const email = document.getElementById('username').value;
+        const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
         var data = {
-            username: email,
+            username: username,
             password: password
         };
 
-        fetch('LoginServlet', {
+        fetch('UserLoginServlet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -99,6 +103,47 @@
             	localStorage.setItem('userID', data);
             	console.log(data);
                 window.location.href = 'events.html';
+            }
+        })
+        .catch(errorResponse => {
+            errorResponse.text().then(errorMessage => {
+                alert('Login failed: ' + errorMessage);
+            });
+        });
+    });
+	
+	
+	document.getElementById('organizerlog').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        var data = {
+            username: username,
+            password: password
+        };
+
+        fetch('OrganizerLoginServlet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw response;
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data === -1) {
+            	alert('Invalid username or password. Please try again.');
+            } else {
+            	localStorage.setItem('organizerID', data);
+            	console.log(data);
+                window.location.href = 'profile-organizer.html';
             }
         })
         .catch(errorResponse => {
