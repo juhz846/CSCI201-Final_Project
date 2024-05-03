@@ -71,7 +71,7 @@ nav div a{
 .login-container {
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 80%;
+    height: 90%;
     width: 60%;
     display: flex;
     flex-direction: row;
@@ -233,7 +233,7 @@ nav div a{
     border-radius: 12px;
     cursor: pointer;
     margin: auto;
-    width: 40%;
+    width: 48%;
     justify-content: center;
     transition: background-color 0.3s;
     display: block;   

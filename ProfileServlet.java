@@ -55,8 +55,7 @@ public class ProfileServlet extends HttpServlet {
 
 		int ID = tu.ID;
 		String json = "";
-		if (type == "user") {
-			System.out.println("BBBBBBBBB");
+		if (type.equals("user")) {
 			json = JDBC.getUserEventData(ID);
 		}
 		else {

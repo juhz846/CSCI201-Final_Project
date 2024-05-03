@@ -9,8 +9,6 @@ import java.util.Date;
 
 public class JDBC {
 	public static String getUserEventData(int userID) {
-		System.out.println("AAAAAAAAAAAAAA");
-
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -19,7 +17,9 @@ public class JDBC {
 		
 		Connection conn = null;
 		Statement st = null;
+		Statement st2 = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		
 		String json = "";
 				
@@ -31,21 +31,20 @@ public class JDBC {
 				int event_id = rs.getInt("id");
 				int quantity = rs.getInt("quantity");
 				
-				System.out.println(quantity);
-				
-				rs = st.executeQuery("SELECT * FROM events where id='"+event_id+"'");
-				if (rs.next()) {
-					String name = rs.getString("name");
-					int organizer_id = rs.getInt("organizer_id");
-					Date event_date = rs.getDate("event_date");
-					Time event_time = rs.getTime("event_time");
-					String city = rs.getString("city");
-					String state = rs.getString("state");
-					int total_availability = rs.getInt("total_availability");
-					int availability = rs.getInt("availability");
-					int price = rs.getInt("price");
-					String description = rs.getString("description");
-					String img_file = rs.getString("img_file");
+				st2 = conn.createStatement();
+				rs2 = st2.executeQuery("SELECT * FROM events where id='"+event_id+"'");
+				if (rs2.next()) {
+					String name = rs2.getString("name");
+					int organizer_id = rs2.getInt("organizer_id");
+					Date event_date = rs2.getDate("event_date");
+					Time event_time = rs2.getTime("event_time");
+					String city = rs2.getString("city");
+					String state = rs2.getString("state");
+					int total_availability = rs2.getInt("total_availability");
+					int availability = rs2.getInt("availability");
+					int price = rs2.getInt("price");
+					String description = rs2.getString("description");
+					String img_file = rs2.getString("img_file");
 
 					json += "{\"name\"" + ": \"" + name + "\"," + 
 							"\"organizer_id\"" + ": \"" + organizer_id + "\"," + 

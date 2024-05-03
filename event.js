@@ -16,7 +16,10 @@ function generateContent(eventName){
 					document.getElementById("description").innerHTML = "<strong>Description: </strong>"+json.description;
 					document.getElementById("price").innerHTML = "<strong>Price:</strong> $"+json.price;
 					document.getElementById("image").innerHTML = '<img align="right" class="event-image" src="'+json.img_file+'" alt="Image failed to load"></img>';
-
+					if (localStorage.getItem("userID")>0){
+						document.getElementById("buy").innerHTML = 'Quantity: <input class="narrow" type=text id="quantity"></input><br>'+
+			    		'<button class="buy-button" onclick="buyTicket()">Buy Tickets</button>'
+					}
 					break;
 				}
 			}

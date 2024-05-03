@@ -30,6 +30,7 @@ function  generateNavbar(){
 		document.getElementById("navbar").innerHTML = ""+
 		"<h1>201 ticketing</h1>"+
 		"<div>"+
+			'<button id="home-btn"><a href="events.html">Home</a></button> '+
             '<button id="signin-btn"><a href="login_page.html">Login</a></button>'+
         "</div>"
 	}

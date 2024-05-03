@@ -129,7 +129,7 @@
             
             // AJAX request
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "eventCreationServlet");
+            xhr.open("POST", "EventCreationServlet");
 /*             xhr.setRequestHeader("Content-Type", "multipart/form-data");
  */            xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
@@ -140,7 +140,7 @@
                     	console.log(response);
                     	// potentially to use in event details page to populate page dynamically
                     	localStorage.setItem('event_id', response);
-                    	window.location.href = "events.html"; // CHANGE THIS TO EVENT DETAIL PAGE?
+                    	window.location.href = "profile-organizer.html"; // CHANGE THIS TO EVENT DETAIL PAGE?
                     }
                 }else if(xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200){
                     var response = JSON.parse(xhr.responseText);

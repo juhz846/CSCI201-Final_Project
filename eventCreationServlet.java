@@ -13,11 +13,11 @@ import java.sql.*;
 import java.io.*;
 
 
-@WebServlet("/eventCreationServlet")
+@WebServlet("/EventCreationServlet")
 @MultipartConfig
 public class EventCreationServlet extends HttpServlet {
 	
-	protected static int registerEvent(Event event, byte[] fileData) {
+	protected static int registerEvent(Event event) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		}catch(ClassNotFoundException e) {
@@ -34,11 +34,9 @@ public class EventCreationServlet extends HttpServlet {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=root");
 			
-			
-			
 			// INSERT EVENT
 			
-			ps = conn.prepareStatement("INSERT INTO events (name, organizer_id, event_date, event_time, city, state, total_available, price, description, img_file, artist) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			ps = conn.prepareStatement("INSERT INTO events (name, organizer_id, event_date, event_time, city, state, total_availability, availability, price, description, img_file, artist) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, event.getName());
 			ps.setInt(2, event.getOrganizer());
 			ps.setString(3, event.getDate());
@@ -46,10 +44,11 @@ public class EventCreationServlet extends HttpServlet {
 			ps.setString(5, event.getCity());
 			ps.setString(6, event.getState());
 			ps.setInt(7, event.getTotalAvail());
-			ps.setDouble(8, event.getPrice());
-			ps.setString(9, event.getDescription());
-			ps.setBytes(10, fileData);
-			ps.setString(11, event.getArtist());
+			ps.setInt(8, event.getTotalAvail());
+			ps.setDouble(9, event.getPrice());
+			ps.setString(10, event.getDescription());
+			ps.setString(11, event.getImgFile());
+			ps.setString(12, event.getArtist());
 			ps.executeUpdate();
 			
 			// get index of inserted event
@@ -90,6 +89,8 @@ public class EventCreationServlet extends HttpServlet {
         Part filePart = request.getPart("file");
         // Get the filename from the Part
         String fileName = filePart.getSubmittedFileName();
+        
+        System.out.println(fileName);
 
         // Get the InputStream of the file data
         InputStream fileContent = filePart.getInputStream();
@@ -113,11 +114,11 @@ public class EventCreationServlet extends HttpServlet {
         String eventDescription = request.getParameter("eventDescription");
 	    
 
-        Event event = new Event(eventName, Integer.parseInt(eventOrganizer), eventDate, eventTime, eventCity, eventState, Integer.parseInt(totalTickets), Double.parseDouble(ticketPrice), eventDescription, fileName, eventArtist);
+        Event event = new Event(eventName, Integer.parseInt(eventOrganizer), eventDate, eventTime, eventCity, eventState, Integer.parseInt(totalTickets), Double.parseDouble(ticketPrice), eventDescription, "img/"+fileName, eventArtist);
         
         
         
-	    int eventID = registerEvent(event, fileData);
+	    int eventID = registerEvent(event);
 	    
 	    Gson gson = new Gson();
 	    
