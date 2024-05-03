@@ -28,6 +28,16 @@ nav div a{
 
 }
 
+#home-btn {
+    width: 80px;
+    height: 30px;
+    border: 0;
+    border-radius: 30px;
+    text-align: center;
+    background-color: rgb(37, 37, 145);
+    font-family: Poppins, sans serif;
+}
+
 #profile-btn {
     font-size: 18px;
     color: white;
@@ -122,12 +132,26 @@ nav div a{
 	width: 25px;
 }
 
+#image{
+	text-align: right;
+	margin-left: auto
+}
 
 .xxl-text {
 	font-size: xx-large;
 }
 .xl-text {
 	font-size: x-large;
+}
+
+.narrow{
+	width: 25px;
+}
+
+.buy-container{
+  background-color: white;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .white-text {
@@ -138,16 +162,13 @@ nav div a{
 }
 
 .buy-button {
+  margin-top: 10px;
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  margin-left: 50%;
 }
 
 
@@ -155,8 +176,14 @@ nav div a{
   flex: 1;
 }
 
+.info-container{
+	display: flex;
+    grid-template-columns: 1fr auto
+}
+
 .event-image {
   margin-left: 20px;
+  width: 200px;
 }
 
 nav {

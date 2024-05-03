@@ -8,17 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="events.js"></script>
+    <script src="shared.js"></script>
 </head>
 
-<body style = "font-family: Poppins, sans-serif;" onload="generateContent();"> 
-    <nav>
-        <h1>201 ticketing</h1>
-        <div>
-            <button id="signin-btn"><a href="login_page.html">Sign in</a></button>
-            <button id="profile-btn"><i class="fa fa-user"></i></button>
-        </div>
-
-
+<body style = "font-family: Poppins, sans-serif;" onload="generateContent(); generateNavbar();"> 
+    <nav id="navbar">
     </nav>
     <main>
         <h1 align="center">EXPLORE EVENTS</h1>

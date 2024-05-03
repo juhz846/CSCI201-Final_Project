@@ -13,8 +13,7 @@
 	<h1>201 ticketing</h1>
 	<div>
 		<button id="home-button" style = " width: 80px; height: 30px;"> <a href="events.html">Home</a> </button>
-		<button id="profile-btn"><i class="fa fa-user"></i></button>
-		</div>
+	</div>
 	</nav>
 	<div id = "whole">
     
@@ -45,8 +44,8 @@
 
 					<p>Select your role to SIGN UP:</p>
 					<div class="role-selection">
-						<button type="submit" id = "usersignup" class="role-button buyer">User</button>
-						<button type="submit" id = "organizersignup" class="role-button organizer">Organizer</button>
+						<button type="submit" id = "signup" class="role-button buyer">Buyer</button>
+						<button type="submit" id="org-signup" class="role-button organizer">Organizer</button>
 					</div>
 				</form>
 			</div>
@@ -67,54 +66,7 @@
         }
     }
     
-	document.getElementById('usersignup').addEventListener('click', function (event) {
-	    event.preventDefault(); // Prevent the form from submitting until we do our check
-
-	    const password = document.getElementById('password').value;
-	    const email = document.getElementById('email').value;
-	    const username = document.getElementById('username').value;
-
-
-		    var data = {
-		        email: email,
-		        username: username,
-		        password: password
-		    };
-	
-		    // Use fetch to send the POST request
-		    fetch('UserRegisterServlet', {
-		        method: 'POST',
-		        headers: {
-		            'Content-Type': 'application/json'
-		        },
-		        body: JSON.stringify(data)
-		    })
-		    .then(response => {
-		        if (!response.ok) {
-		            throw response;
-		        }
-		        return response.json();
-		    })
-		    .then((data) => {
-		        localStorage.setItem('userID', JSON.stringify(data));
-		        console.log(JSON.parse(localStorage.getItem("userID")));
-
-		        if (data === -1) {
-		            alert('Username is taken. Please try a different one.');
-		        } else if (data === -2) {
-		            alert('Email is already registered. Please use a different email.');
-		        } else {
-		            window.location.href = 'events.html';
-		        }
-		    })
-		    .catch(errorResponse => {
-		        errorResponse.text().then( errorMessage => {
-		            alert(JSON.parse(errorMessage));
-		        });
-		    });
-	});
-	
-	document.getElementById('organizersignup').addEventListener('click', function (event) {
+    document.getElementById('org-signup').addEventListener('click', function (event) {
 	    event.preventDefault(); // Prevent the form from submitting until we do our check
 
 	    const password = document.getElementById('password').value;
@@ -144,7 +96,8 @@
 		    })
 		    .then((data) => {
 		        localStorage.setItem('organizerID', JSON.stringify(data));
-		        console.log(JSON.parse(localStorage.getItem("organizerID")));
+		        localStorage.setItem('userID', null);
+		        console.log(JSON.parse(localStorage.getItem("userID")));
 
 		        if (data === -1) {
 		            alert('Username is taken. Please try a different one.');
@@ -156,6 +109,54 @@
 		    })
 		    .catch(errorResponse => {
 		        errorResponse.text().then( errorMessage => {
+		            alert(JSON.parse(errorMessage));
+		        });
+		    });
+	});
+    
+	document.getElementById('signup').addEventListener('click', function (event) {
+	    event.preventDefault(); // Prevent the form from submitting until we do our check
+
+	    const password = document.getElementById('password').value;
+	    const email = document.getElementById('email').value;
+	    const username = document.getElementById('username').value;
+
+
+		    var data = {
+		        email: email,
+		        username: username,
+		        password: password
+		    };
+	
+		    // Use fetch to send the POST request
+		    fetch('UserRegisterServlet', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+		        },
+		        body: JSON.stringify(data)
+		    })
+		    .then(response => {
+		        if (!response.ok) {
+		            throw response;
+		        }
+		        return response.json();
+		    })
+		    .then((data) => {
+		        localStorage.setItem('userID', JSON.stringify(data));
+		        localStorage.setItem('organizerID', null);
+		        console.log(JSON.parse(localStorage.getItem("userID")));
+
+		        if (data === -1) {
+		            alert('Username is taken. Please try a different one.');
+		        } else if (data === -2) {
+		            alert('Email is already registered. Please use a different email.');
+		        } else {
+		            window.location.href = 'events.html';
+		        }
+		    })
+		    .catch(errorResponse => {
+		        errorResponse.text().then(errorMessage => {
 		            alert(JSON.parse(errorMessage));
 		        });
 		    });

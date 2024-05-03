@@ -1,5 +1,3 @@
-package servlet;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -18,7 +16,7 @@ import com.google.gson.Gson;
 
 
 @WebServlet("/OrganizerRegisterServlet")
-public class OrganizerRegisterServlet {
+public class OrganizerRegisterServlet extends HttpServlet {
 	
 	protected static int registerOrganizer(String email, String password, String username) {
 		try {
@@ -35,7 +33,7 @@ public class OrganizerRegisterServlet {
 		int organizerID = -1;
 		
 		try {
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=allent2004");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=root");
 			
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM organizers WHERE email='" + email + "'");

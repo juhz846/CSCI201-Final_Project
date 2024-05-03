@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 
-@WebServlet("/UserRegisterServlet")
-public class UserRegisterServlet extends HttpServlet {
+@WebServlet("/RegisterServlet")
+public class RegisterServlet {
 	
 	protected static int registerUser(String email, String password, String username) {
 		try {
@@ -33,7 +33,7 @@ public class UserRegisterServlet extends HttpServlet {
 		int userID = -1;
 		
 		try {
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=root");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=allent2004");
 			
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM users WHERE email='" + email + "'");
@@ -76,7 +76,7 @@ public class UserRegisterServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public UserRegisterServlet() {
+	public RegisterServlet() {
 	      super();
 	  }
 	
@@ -106,7 +106,6 @@ public class UserRegisterServlet extends HttpServlet {
 		}
 		
 		int userID = registerUser(email, password, username);
-		System.out.println(userID);
 		
 		if (userID == -1) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

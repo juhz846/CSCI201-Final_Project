@@ -13,26 +13,23 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class EventPurchaseServlet
+ * Servlet implementation class EventDisplayServlet
  */
-@WebServlet("/EventPurchaseServlet")
-public class EventPurchaseServlet extends HttpServlet {
+@WebServlet("/ProfileServlet")
+public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EventPurchaseServlet() {
+    public ProfileServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -41,7 +38,7 @@ public class EventPurchaseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = response.getWriter();
 
-		response.setContentType("application/json");
+		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		
 		BufferedReader reader = request.getReader();
@@ -51,31 +48,28 @@ public class EventPurchaseServlet extends HttpServlet {
 		    requestBody.append(line);
 		}
 		
-		System.out.println(requestBody.toString());
 		
-		Gson gson = new Gson();
-		Ticket ticket = new Gson().fromJson(requestBody.toString(), Ticket.class);
+		TypeUser tu = new Gson().fromJson(requestBody.toString(), TypeUser.class);
 		
-		int purchase_success = JDBC.buyTicket(ticket.name, ticket.userID, ticket.quantity);
-		if (purchase_success > 0) {
-			response.setStatus(HttpServletResponse.SC_OK);
-			String json = "Successfully purchased ticket for " + ticket.name;
-			pw.write(gson.toJson(json));
-			pw.flush();	
-		} else {
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			String error = "Unable to purchase ticket";
-			pw.write(gson.toJson(error));
-			pw.flush();	
+		String type = tu.type;
+
+		int ID = tu.ID;
+		String json = "";
+		if (type == "user") {
+			System.out.println("BBBBBBBBB");
+			json = JDBC.getUserEventData(ID);
+		}
+		else {
+			json = JDBC.getOrganizerEventData(ID);
 		}
 		
-				
-	}
-	
-	class Ticket {
-		public String name;
-		public int userID;
-		public int quantity;
+		pw.write(json);
+		pw.flush();		
 	}
 
+}
+
+class TypeUser{
+	public int ID;
+	public String type;	
 }

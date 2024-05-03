@@ -15,6 +15,7 @@ function generateContent(eventName){
 					document.getElementById("date").innerHTML = "<strong>Date/Time: </strong>"+json.event_date + " " + json.event_time;
 					document.getElementById("description").innerHTML = "<strong>Description: </strong>"+json.description;
 					document.getElementById("price").innerHTML = "<strong>Price:</strong> $"+json.price;
+					document.getElementById("image").innerHTML = '<img align="right" class="event-image" src="'+json.img_file+'" alt="Image failed to load"></img>';
 
 					break;
 				}
@@ -29,8 +30,8 @@ function buyTicket(){
 		url: "EventPurchaseServlet",
 		data: JSON.stringify({
 			name: document.getElementById("name").innerHTML,
-			userID: 1
-			//userID: localStorage.getItem("user_id")
+			userID: localStorage.getItem("userID"),
+			quantity: document.getElementById("quantity").value
 		}),
 		success: (result)=>{
 			console.log(result)

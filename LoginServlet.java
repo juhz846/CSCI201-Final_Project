@@ -15,12 +15,10 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-
-
-@WebServlet("/OrganizerLoginServlet")
-public class OrganizerLoginServlet extends HttpServlet {
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
 	
-	protected static int loginOrganizer(String username, String password) {
+	protected static int loginUser(String username, String password) {
 			
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
@@ -33,17 +31,17 @@ public class OrganizerLoginServlet extends HttpServlet {
 		    Statement st = null;
 		    ResultSet rs = null;
 	
-		    int organizerID = -1;
+		    int userID = -1;
 	
 		    try {
 		        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=root");
 		        st = conn.createStatement();
 		        
-		        String sql = "SELECT id FROM organizers WHERE username='" + username + "' AND password='" + password + "'";
+		        String sql = "SELECT id FROM users WHERE username='" + username + "' AND password='" + password + "'";
 		        
 		        rs = st.executeQuery(sql);
 		        if (rs.next()) {
-		        	organizerID = rs.getInt("id");
+		            userID = rs.getInt("id");
 		        } 
 		    } catch (SQLException sqle) {
 		        sqle.printStackTrace();
@@ -57,14 +55,14 @@ public class OrganizerLoginServlet extends HttpServlet {
 		        }
 		    }
 	
-		    return organizerID;
+		    return userID;
 		}
 
 
 	
 	private static final long serialVersionUID = 1L;
 	    
-	    public OrganizerLoginServlet() {
+	    public LoginServlet() {
 	        super();
 	    }
 	
@@ -75,12 +73,11 @@ public class OrganizerLoginServlet extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter pw = response.getWriter();
 			
-			Organizer organizer = new Gson().fromJson(request.getReader(), Organizer.class);
+			User user = new Gson().fromJson(request.getReader(), User.class);
 			
-			String username = organizer.getUsername();
-			
-			String password = organizer.getPassword();
-			
+			String username = user.getUsername();
+			String password = user.getPassword();
+						
 			Gson gson = new Gson();
 	    	
 			if (username == null || password == null) {
@@ -88,14 +85,14 @@ public class OrganizerLoginServlet extends HttpServlet {
 				String error = "Please fill out all required information";
 				pw.write(gson.toJson(error));
 				pw.flush();
+				return;
 			}
 	        
-	        int organizerID = loginOrganizer(username, password);
-	
+	        int userID = loginUser(username, password);
 	        
-	        if (organizerID > 0) {
+	        if (userID > 0) {
 	            response.setStatus(HttpServletResponse.SC_OK);
-	            pw.write(gson.toJson(organizerID));
+	            pw.write(gson.toJson(userID));
 	            pw.flush();
 	        } else {
 	            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -107,66 +104,4 @@ public class OrganizerLoginServlet extends HttpServlet {
 	        pw.close();
 	    }
 
-}
-
-
-
-
-class Organizer {
-    private int organizerId;
-    private String username;
-    private String password;
-    private String email;
-    private double balance;
-
-    // Constructor
-    public Organizer(String username, String password, String email, double balance) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.balance = balance;
-    }
-
-    // Getters
-    public int getUserId() {
-        return organizerId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    // Setters
-    public void setUserId(int organizerId) {
-        this.organizerId = organizerId;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-    
 }

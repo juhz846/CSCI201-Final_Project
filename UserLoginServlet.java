@@ -1,5 +1,3 @@
-package servlet;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -38,10 +36,10 @@ public class UserLoginServlet extends HttpServlet {
 		    int userID = -1;
 	
 		    try {
-		        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=allent2004");
+		    	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=root");
 		        st = conn.createStatement();
 		        
-		        String sql = "SELECT id FROM users WHERE username='" + username.replaceAll("'", "''") + "' AND password='" + password.replaceAll("'", "''") + "'";
+		        String sql = "SELECT id FROM users WHERE username='" + username + "' AND password='" + password + "'";
 		        
 		        rs = st.executeQuery(sql);
 		        if (rs.next()) {
@@ -109,66 +107,4 @@ public class UserLoginServlet extends HttpServlet {
 	        pw.close();
 	    }
 
-}
-
-
-
-
-class User {
-    private int userId;
-    private String username;
-    private String password; // Note: Storing passwords as plain text is not secure.
-    private String email;
-    private double balance;
-
-    // Constructor
-    public User(String username, String password, String email, double balance) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.balance = balance;
-    }
-
-    // Getters
-    public int getUserId() {
-        return userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    // Setters
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-    
 }

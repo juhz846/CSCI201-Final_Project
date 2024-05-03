@@ -15,7 +15,7 @@ import java.io.*;
 
 @WebServlet("/eventCreationServlet")
 @MultipartConfig
-public class eventCreationServlet extends HttpServlet {
+public class EventCreationServlet extends HttpServlet {
 	
 	protected static int registerEvent(Event event, byte[] fileData) {
 		try {
@@ -32,7 +32,7 @@ public class eventCreationServlet extends HttpServlet {
 		int eventID = -1;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=allent2004");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ticketmaster?user=root&password=root");
 			
 			
 			
